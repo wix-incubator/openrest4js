@@ -1,9 +1,7 @@
 import ChargeV2 from '../../src/openrest4js-helpers/ChargeV2.js';
 import { expect } from 'chai';
 import moment from 'moment';
-import createCharge from '../../src/openrest4js-fixtures/ChargeV2.js';
-import createWeeklyAvailability from '../../src/openrest4js-fixtures/WeeklyAvailability.js';
-import { helpers } from '../../src/index.js';
+import { helpers, fixtures } from '../../src/index.js';
 
 const { Charge, Time } = helpers;
 
@@ -14,10 +12,10 @@ describe('openrest4js-helpers: ChargesV2', () => {
         it('returns whether or not a charge is applicable based on delivery type, platform, minimum, and time', () => { 
             const now = moment();
 
-            const charge = createCharge().
+            const charge = fixtures.ChargeV2().
                 deliveryTypes(['delivery']).
                 platforms(['mobileweb', 'web']).
-                deliveryTime(createWeeklyAvailability().duration(Time, now.clone().subtract(1, 'hours'), now.clone().add(1, 'hours')).val()).
+                deliveryTime(fixtures.Availability().duration({start:now.clone().subtract(1, 'hours'), end:now.clone().add(1, 'hours')}).val()).
                 val();
 
             expect(ChargeV2.isApplicable({
@@ -29,20 +27,20 @@ describe('openrest4js-helpers: ChargesV2', () => {
             expect(ChargeV2.isApplicable({
                 charge, orderItems:[], deliveryType:'delivery', deliveryTime:now.clone().add(3, 'hours'), platform:'mobileweb'})).to.be.false;
 
-            const closedCharge = createCharge().
+            const closedCharge = fixtures.ChargeV2().
                 deliveryTypes(['delivery']).
                 platforms(['mobileweb', 'web']).
-                deliveryTime(createWeeklyAvailability().duration(Time, now.clone().subtract(1, 'hours'), now.clone().add(1, 'hours')).val()).
+                deliveryTime(fixtures.Availability().duration({start:now.clone().subtract(1, 'hours'), end:now.clone().add(1, 'hours')}).val()).
                 close().
                 val();
 
             expect(ChargeV2.isApplicable({
                 charge:closedCharge, orderItems:[], deliveryType:'delivery', deliveryTime:now, platform:'mobileweb'})).to.be.false;
 
-            const minCharge = createCharge().
+            const minCharge = fixtures.ChargeV2().
                 deliveryTypes(['delivery']).
                 platforms(['mobileweb', 'web']).
-                deliveryTime(createWeeklyAvailability().duration(Time, now.clone().subtract(1, 'hours'), now.clone().add(1, 'hours')).val()).
+                deliveryTime(fixtures.Availability().duration({start:now.clone().subtract(1, 'hours'), end:now.clone().add(1, 'hours')}).val()).
                 min(1000).
                 val();
 
@@ -58,10 +56,10 @@ describe('openrest4js-helpers: ChargesV2', () => {
         it('returns whether or not a charge should be displayed in the cart based on delivery type, platform, and time', () => { 
             const now = moment();
 
-            const charge = createCharge().
+            const charge = fixtures.ChargeV2().
                 displayConditionDeliveryTypes(['delivery']).
                 displayConditionPlatforms(['mobileweb', 'web']).
-                displayConditionDeliveryTime(createWeeklyAvailability().duration(Time, now.clone().subtract(1, 'hours'), now.clone().add(1, 'hours')).val()).
+                displayConditionDeliveryTime(fixtures.Availability().duration({start:now.clone().subtract(1, 'hours'), end:now.clone().add(1, 'hours')}).val()).
                 val();
 
             expect(ChargeV2.isDisplayable({
@@ -73,20 +71,20 @@ describe('openrest4js-helpers: ChargesV2', () => {
             expect(ChargeV2.isDisplayable({
                 charge, orderItems:[], deliveryType:'delivery', deliveryTime:now.clone().add(3, 'hours'), platform:'mobileweb'})).to.be.false;
 
-            const closedCharge = createCharge().
+            const closedCharge = fixtures.ChargeV2().
                 displayConditionDeliveryTime(['delivery']).
                 displayConditionPlatforms(['mobileweb', 'web']).
-                displayConditionDeliveryTime(createWeeklyAvailability().duration(Time, now.clone().subtract(1, 'hours'), now.clone().add(1, 'hours')).val()).
+                displayConditionDeliveryTime(fixtures.Availability().duration({start:now.clone().subtract(1, 'hours'), end:now.clone().add(1, 'hours')}).val()).
                 close().
                 val();
 
             expect(ChargeV2.isDisplayable({
                 charge:closedCharge, orderItems:[], deliveryType:'delivery', deliveryTime:now, platform:'mobileweb'})).to.be.false;
 
-            const minCharge = createCharge().
+            const minCharge = fixtures.ChargeV2().
                 displayConditionDeliveryTypes(['delivery']).
                 displayConditionPlatforms(['mobileweb', 'web']).
-                displayConditionDeliveryTime(createWeeklyAvailability().duration(Time, now.clone().subtract(1, 'hours'), now.clone().add(1, 'hours')).val()).
+                displayConditionDeliveryTime(fixtures.Availability().duration({start:now.clone().subtract(1, 'hours'), end:now.clone().add(1, 'hours')}).val()).
                 displayConditionMin(1000).
                 val();
 
