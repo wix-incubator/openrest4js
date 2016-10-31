@@ -4,7 +4,7 @@ export default function createAvailability() {
     let fixture = {weekly: []};
 
     return {
-        duration({_Time = Time, start, end}) {
+        addWeeklyFromDate({_Time = Time, start, end}) {
             let startMinute = Math.floor(_Time.getMinuteOfWeek(start));
             let endMinute = Math.floor(_Time.getMinuteOfWeek(end));
             let duration = endMinute - startMinute;

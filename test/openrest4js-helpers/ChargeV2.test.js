@@ -15,7 +15,7 @@ describe('openrest4js-helpers: ChargesV2', () => {
             const charge = fixtures.ChargeV2().
                 deliveryTypes(['delivery']).
                 platforms(['mobileweb', 'web']).
-                deliveryTime(fixtures.Availability().duration({start:now.clone().subtract(1, 'hours'), end:now.clone().add(1, 'hours')}).val()).
+                deliveryTime(fixtures.Availability().addWeeklyFromDate({start:now.clone().subtract(1, 'hours'), end:now.clone().add(1, 'hours')}).val()).
                 val();
 
             expect(ChargeV2.isApplicable({
@@ -30,7 +30,7 @@ describe('openrest4js-helpers: ChargesV2', () => {
             const closedCharge = fixtures.ChargeV2().
                 deliveryTypes(['delivery']).
                 platforms(['mobileweb', 'web']).
-                deliveryTime(fixtures.Availability().duration({start:now.clone().subtract(1, 'hours'), end:now.clone().add(1, 'hours')}).val()).
+                deliveryTime(fixtures.Availability().addWeeklyFromDate({start:now.clone().subtract(1, 'hours'), end:now.clone().add(1, 'hours')}).val()).
                 close().
                 val();
 
@@ -40,7 +40,7 @@ describe('openrest4js-helpers: ChargesV2', () => {
             const minCharge = fixtures.ChargeV2().
                 deliveryTypes(['delivery']).
                 platforms(['mobileweb', 'web']).
-                deliveryTime(fixtures.Availability().duration({start:now.clone().subtract(1, 'hours'), end:now.clone().add(1, 'hours')}).val()).
+                deliveryTime(fixtures.Availability().addWeeklyFromDate({start:now.clone().subtract(1, 'hours'), end:now.clone().add(1, 'hours')}).val()).
                 min(1000).
                 val();
 
@@ -59,7 +59,7 @@ describe('openrest4js-helpers: ChargesV2', () => {
             const charge = fixtures.ChargeV2().
                 displayConditionDeliveryTypes(['delivery']).
                 displayConditionPlatforms(['mobileweb', 'web']).
-                displayConditionDeliveryTime(fixtures.Availability().duration({start:now.clone().subtract(1, 'hours'), end:now.clone().add(1, 'hours')}).val()).
+                displayConditionDeliveryTime(fixtures.Availability().addWeeklyFromDate({start:now.clone().subtract(1, 'hours'), end:now.clone().add(1, 'hours')}).val()).
                 val();
 
             expect(ChargeV2.isDisplayable({
@@ -74,7 +74,7 @@ describe('openrest4js-helpers: ChargesV2', () => {
             const closedCharge = fixtures.ChargeV2().
                 displayConditionDeliveryTime(['delivery']).
                 displayConditionPlatforms(['mobileweb', 'web']).
-                displayConditionDeliveryTime(fixtures.Availability().duration({start:now.clone().subtract(1, 'hours'), end:now.clone().add(1, 'hours')}).val()).
+                displayConditionDeliveryTime(fixtures.Availability().addWeeklyFromDate({start:now.clone().subtract(1, 'hours'), end:now.clone().add(1, 'hours')}).val()).
                 close().
                 val();
 
@@ -84,7 +84,7 @@ describe('openrest4js-helpers: ChargesV2', () => {
             const minCharge = fixtures.ChargeV2().
                 displayConditionDeliveryTypes(['delivery']).
                 displayConditionPlatforms(['mobileweb', 'web']).
-                displayConditionDeliveryTime(fixtures.Availability().duration({start:now.clone().subtract(1, 'hours'), end:now.clone().add(1, 'hours')}).val()).
+                displayConditionDeliveryTime(fixtures.Availability().addWeeklyFromDate({start:now.clone().subtract(1, 'hours'), end:now.clone().add(1, 'hours')}).val()).
                 displayConditionMin(1000).
                 val();
 
