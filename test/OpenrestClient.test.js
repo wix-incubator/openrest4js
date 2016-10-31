@@ -1,7 +1,7 @@
 import { expect }         from 'chai'
 import { XMLHttpRequest } from 'xhr2'
 import OpenrestDriver     from './OpenrestDriver'
-import OpenrestClient     from '../src/OpenrestClient'
+import {OpenrestClient}   from '../src/index.js'
 
 describe('OpenrestClient', () => {
 	const port           = 8086
