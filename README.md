@@ -53,3 +53,7 @@ Helper functions to work with ChargeV2 objects.
 ### OrderItem
 Helper functions to work with OrderItems objects.
 - ```getTotalPrice({orderItem})``` - Calculates the total price of an OrderItem (including variations).
+
+### Order
+Helper functions to work with Order objects.
+- ```getOrderCharges({order, chargesV2})``` - Returns the orderCharges calculated, that should be added to the order object. Receives an existing **order** object that should contain **order.deilvery.type**, **order.delivery.time**, and **order.orderItems** to calculate correctly. **chargeV2** should be from the menu.
