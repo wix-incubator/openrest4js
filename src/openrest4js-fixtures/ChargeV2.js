@@ -34,6 +34,12 @@ export default function createCharge() {
     }
 
     return {
+
+        id(_id) {
+            fixture.id = _id;
+            return this;
+        },
+               
         title(val) {
             fixture.title = {'en_US':val}
             return this;
@@ -44,12 +50,15 @@ export default function createCharge() {
             return this;
         },
 
-        percentageDiscount({percentage, itemIds}) {
+        percentageDiscount({percentage, itemIds, chargeIds}) {
             fixture.type = 'discount';
             fixture.operator = {
                 type: 'multiply',
                 numerators: [
-                    {type: 'sum_prices', items: itemIds ? {type:'include', itemIds} : {type: 'exclude', ids: []}},
+                    {type: 'sum_prices',
+                        items: itemIds ? {type:'include', ids:itemIds} : {type: 'exclude', ids: []},
+                        charges: chargeIds ? {type:'include', ids:chargeIds} : null
+                    },
                     {type: 'value', value: percentage},
                 ],
                 denominators: [
@@ -99,7 +108,7 @@ export default function createCharge() {
 
         min(min) {
             if (min) {
-                fixture.condition.conditions[3] = {type: 'order_items_price', min: 123};
+                fixture.condition.conditions[3] = {type: 'order_items_price', min};
             } else {
                 fixture.condition.conditions[3] = {type: 'true'};
             }
@@ -157,6 +166,11 @@ export default function createCharge() {
 
         close() {
             fixture.state = 'closed';
+            return this;
+        },
+
+        mandatory() {
+            fixture.mandatory = true;
             return this;
         },
 
