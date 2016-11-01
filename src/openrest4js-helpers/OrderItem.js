@@ -9,7 +9,7 @@ export default {
 
         (orderItem.variationsChoices || []).forEach(choices => {
             (choices || []).forEach(choice => {
-                price += self.getTotalPrice({orderItem:choice});
+                price += this.getTotalPrice({orderItem:choice});
             });
         });
 
