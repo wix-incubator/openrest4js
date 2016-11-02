@@ -16,6 +16,11 @@ export default function createOrderItem() {
             return this;
         },
 
+        count(count) {
+            fixture.count = count;
+            return this;
+        },
+
         val() {
             return fixture;
         }
