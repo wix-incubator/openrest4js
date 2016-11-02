@@ -34,7 +34,7 @@ describe('openrest4js-helpers: Order', () => {
                 fixtures.ChargeV2().id('charge7').percentageDiscount({percentage:10000}).val(),
             ];
 
-            const orderCharges = Order.getOrderCharges({order, chargesV2, timezone:'Asia/Jerusalem'});
+            const orderCharges = Order.getOrderCharges({order, chargesV2});
             expect(orderCharges).to.deep.equal([
                 {chargeId:'charge1', amount:-100},
                 {chargeId:'charge3', amount:0},
