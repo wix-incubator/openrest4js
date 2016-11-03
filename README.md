@@ -1,5 +1,7 @@
 #openrest4js
 
+[![NPM version][npm-image]][npm-url] [![Downloads][downloads-image]][npm-url]
+
 [OpenRest](http://www.openrest.com/) (founded early 2011) is a cloud-based service that enables restaurant owners to easily create online ordering websites, mobile websites and native mobile apps. As of September 2014, a total of almost a thousand restaurants power their online ordering systems with OpenRest.
 
 OpenRest offers an open API for developers. The OpenRest API is exposed as a standard web service communicating JSON over HTTPS.
@@ -57,3 +59,8 @@ Helper functions to work with OrderItems objects.
 ### Order
 Helper functions to work with Order objects.
 - ```getOrderCharges({order, chargesV2})``` - Returns the orderCharges calculated, that should be added to the order object. Receives an existing **order** object that should contain **order.deilvery.type**, **order.delivery.time**, and **order.orderItems** to calculate correctly. **chargeV2** should be from the menu.
+
+[downloads-image]: https://img.shields.io/npm/dm/openrest4js.svg
+
+[npm-url]: https://npmjs.org/package/openrest4js
+[npm-image]: https://img.shields.io/npm/v/openrest4js.svg
