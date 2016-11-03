@@ -165,8 +165,8 @@ self.calculateAmount = function(params) {
                 var item = orderItems[i];
                 if (isApplicableItem({charge:charge, itemId:item.itemId}))
                 {
-                    var singlePrice = OrderItemHelper.getTotalPrice({orderItem:item}) / item.count;
-                    var discount = Math.max(-1*singlePrice, charge.amountRule) * item.count;
+                    var singlePrice = OrderItemHelper.getTotalPrice({orderItem:item}) / (item.count || 1);
+                    var discount = Math.max(-1*singlePrice, charge.amountRule) * (item.count || 1);
                     total += discount;
                 }
             }
