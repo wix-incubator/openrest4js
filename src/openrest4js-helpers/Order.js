@@ -34,7 +34,16 @@ export default {
                 } else {
                     return {
                         chargeId:charge.id,
-                        amount:ChargeV2Helper.calculateAmount({charge, orderItems:order.orderItems, orderCharges})
+                        amount:ChargeV2Helper.calculateAmount({
+                            charge          : charge,
+                            deliveryTime    : order.delivery.time,
+                            deliveryType    : order.delivery.type,
+                            orderItems      : order.orderItems,
+                            source          : order.source,
+                            platform        : order.platform,
+                            orderItems      : order.orderItems,
+                            orderCharges    : orderCharges
+                        })
                     };
                 }
             }));

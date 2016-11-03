@@ -16,7 +16,7 @@ describe('openrest4js-helpers: Order', () => {
             let chargesV2 = [];
 
             order.delivery = {
-                type: 'pickup',
+                type: 'takeout',
                 time: moment()
             };
 
@@ -28,8 +28,8 @@ describe('openrest4js-helpers: Order', () => {
                 fixtures.ChargeV2().id('charge1').percentageDiscount({percentage:10000}).val(),
                 fixtures.ChargeV2().id('charge2').min(500000).percentageDiscount({percentage:10000}).val(),
                 fixtures.ChargeV2().id('charge3').min(500000).percentageDiscount({percentage:10000}).mandatory().val(),
-                fixtures.ChargeV2().id('charge4').percentageDiscount({percentage:20000, itemIds:['itemid2']}).val(),
-                fixtures.ChargeV2().id('charge5').percentageDiscount({percentage:20000, itemIds:['itemid'], chargeIds:['charge6', 'charge7']}).val(),
+                fixtures.ChargeV2().id('charge4').deliveryTypes(['takeout']).percentageDiscount({percentage:20000, itemIds:['itemid2']}).val(),
+                fixtures.ChargeV2().id('charge5').deliveryTypes(['takeout']).percentageDiscount({percentage:20000, itemIds:['itemid'], chargeIds:['charge6', 'charge7']}).val(),
                 fixtures.ChargeV2().id('charge6').percentageDiscount({percentage:20000, itemIds:['itemid'], chargeIds:['charge7']}).val(),
                 fixtures.ChargeV2().id('charge7').percentageDiscount({percentage:10000}).val(),
             ];

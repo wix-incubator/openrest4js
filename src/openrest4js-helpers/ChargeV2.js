@@ -189,7 +189,9 @@ function calculateOperator(params) {
     var operator = params.operator;
 
     var func = OPERATORS[operator.type] || function() { return 0; };
-    return func(params);
+    const ret = func(params);
+
+    return ret;
 }
 
 function isApplicableItem(itemId, idsFilter) {
