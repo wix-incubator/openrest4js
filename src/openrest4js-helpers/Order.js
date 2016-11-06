@@ -1,4 +1,5 @@
 import _ from 'lodash';
+import moment from 'moment';
 import ChargeV2Helper from './ChargeV2.js';
 
 export default {
@@ -6,10 +7,15 @@ export default {
     /**
      * @return The orderCharges (ChargesV2) that should be added to the order
      */
-    getOrderCharges:function({order, chargesV2}) {
+    getOrderCharges:function({order, chargesV2, timezone}) {
 
         let orderCharges = [];
         let prevOrderCharges = [];
+
+        let deliveryTime = _.get(order, 'delivery.time') || moment();
+        if ((timezone) && (_.isNumber(deliveryTime))) {
+            deliveryTime = moment(deliveryTime).tz(timezone);
+        }
 
         do {
             prevOrderCharges = orderCharges;
@@ -18,7 +24,7 @@ export default {
 
                 const isApplicable = ChargeV2Helper.isApplicable({
                     charge          : charge,
-                    deliveryTime    : order.delivery.time,
+                    deliveryTime    : deliveryTime,
                     deliveryType    : order.delivery.type,
                     orderItems      : order.orderItems,
                     source          : order.source,
@@ -36,7 +42,7 @@ export default {
                         chargeId:charge.id,
                         amount:ChargeV2Helper.calculateAmount({
                             charge          : charge,
-                            deliveryTime    : order.delivery.time,
+                            deliveryTime    : deliveryTime,
                             deliveryType    : order.delivery.type,
                             orderItems      : order.orderItems,
                             source          : order.source,

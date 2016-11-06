@@ -43,6 +43,20 @@ describe('openrest4js-helpers: Order', () => {
                 {chargeId:'charge6', amount:-180},
                 {chargeId:'charge7', amount:-100},
             ]);
+
+            order.delivery = {
+                type: 'takeout',
+                time: new Date().getTime()
+            };
+            const orderCharges2 = Order.getOrderCharges({order, chargesV2});
+            expect(orderCharges2).to.deep.equal([
+                {chargeId:'charge1', amount:-100},
+                {chargeId:'charge3', amount:0},
+                {chargeId:'charge4', amount:-0}, /* Apparently chai doesn't thing 0 === -0 */
+                {chargeId:'charge5', amount:-144},
+                {chargeId:'charge6', amount:-180},
+                {chargeId:'charge7', amount:-100},
+            ]);
         });
     });
 });
