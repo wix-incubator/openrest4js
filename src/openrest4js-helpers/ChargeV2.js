@@ -125,13 +125,14 @@ const OPERATORS = {
 
         var total = 0;
 
-        _.each(orderItems, function(orderItem) {
+        _.each(orderItems, (orderItem) => {
+            console.log(orderItem.itemId, operator.items);
             if (isApplicableItem(orderItem.itemId, operator.items)) {
-                total =+ (orderItem.count || 1);
+                total += (orderItem.count || 1);
             }
         });
 
-        _.each(orderCharges, function(orderCharge) {
+        _.each(orderCharges, (orderCharge) => {
             if (isApplicableItem(orderCharge.chargeId, operator.charges)) {
                 total++;
             }

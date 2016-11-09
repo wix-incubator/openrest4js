@@ -73,7 +73,7 @@ export default function createCharge() {
             fixture.operator = {
                 type:'multiply',
                 numerators: [
-                    {type: 'count_items', items: itemIds ? {type:'include', itemIds} : {type: 'exclude', ids: []}},
+                    {type: 'count_items', items: itemIds ? {type:'include', ids:itemIds} : {type: 'exclude', ids: []}},
                     {type: 'value','value':price}
                 ],
                 denominators:[

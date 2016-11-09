@@ -96,9 +96,10 @@ describe('openrest4js-helpers: ChargesV2', () => {
         });
     });
 
-    describe('calculateAmount', () => {
+    describe.only('calculateAmount', () => {
         it('Correctly calculates the total of a charge', () => {
 
+            // Percentage
             const orderItems = [fixtures.OrderItem().itemId('itemid').price(1000).val()];
             const orderCharges = [{chargeId:'aaa', amount:-200}];
 
@@ -107,6 +108,14 @@ describe('openrest4js-helpers: ChargesV2', () => {
 
             const charge2 = fixtures.ChargeV2().id('charge2').percentageDiscount({percentage:10000, chargeIds:['aaa']}).val();
             expect(ChargeV2.calculateAmount({charge:charge2, orderItems, orderCharges})).to.equal(-80);
+
+            // Fixed
+            const fixedOrderItems = [
+                fixtures.OrderItem().itemId('aaa').price(1000).val(),
+                fixtures.OrderItem().itemId('ccc').price(2000).val()
+            ];
+            const fixedCharge = fixtures.ChargeV2().id('charge').fixedDiscount({price:10, itemIds:['aaa', 'bbb', 'ccc']}).val();
+            expect(ChargeV2.calculateAmount({charge:fixedCharge, orderItems:fixedOrderItems, orderCharges})).to.equal(-20);
         });
     });
 
