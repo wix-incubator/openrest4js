@@ -60,6 +60,11 @@ Helper functions to work with OrderItems objects.
 Helper functions to work with Order objects.
 - ```getOrderCharges({order, chargesV2})``` - Returns the orderCharges calculated, that should be added to the order object. Receives an existing **order** object that should contain **order.deilvery.type**, **order.delivery.time**, and **order.orderItems** to calculate correctly. **chargeV2** should be from the menu.
 
+### Image
+Helper functions to work with image URLs.
+- ```fill({url, width, height})``` - Returns a URL that serves the resized image. Passing 0 for width or height means maximum size.
+
+
 [downloads-image]: https://img.shields.io/npm/dm/openrest4js.svg
 
 [npm-url]: https://npmjs.org/package/openrest4js
