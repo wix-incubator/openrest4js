@@ -1,7 +1,8 @@
-import Charge from './Charge.js';
-import ChargeV2 from './ChargeV2.js';
-import OrderItem from './OrderItem.js';
-import Order from './Order.js';
-import Time from './Time.js';
+import Charge from './Charge';
+import ChargeV2 from './ChargeV2';
+import OrderItem from './OrderItem';
+import Order from './Order';
+import Time from './Time';
+import Image from './Image';
 
-export { Charge, ChargeV2, OrderItem, Order, Time };
+export { Charge, ChargeV2, OrderItem, Order, Time, Image };
