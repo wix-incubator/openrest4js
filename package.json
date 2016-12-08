@@ -7,7 +7,7 @@
     "test": "mocha --require test/setup.js \"test/**/*.test.js\"",
     "lint": "eslint ./src",
     "posttest": "npm run lint",
-    "compile": "babel -d dist/ src/",
+    "compile": "babel -d dist/ src/ && babel -d dist-test/ test/",
     "prepublish": "npm test && npm run compile",
     "build": ":",
     "release": "npm install @wix/wnpm-ci && wnpm-release -- --no-shrinkwrap"
