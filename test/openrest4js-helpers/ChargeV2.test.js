@@ -96,7 +96,7 @@ describe('openrest4js-helpers: ChargesV2', () => {
         });
     });
 
-    describe.only('calculateAmount', () => {
+    describe('calculateAmount', () => {
         it('Correctly calculates the total of a charge', () => {
 
             // Percentage
