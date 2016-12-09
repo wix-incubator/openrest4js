@@ -37,7 +37,14 @@ export class CommonProtocolDriver {
             if (rule) {
                 _.delay(() => {
                     res.writeHead(200, {'Content-Type': rule.useRawResponse ? 'text/html' : 'application/json'})
-                    res.end(rule.useRawResponse ? rule.response : JSON.stringify(rule.response))
+
+                    let response = rule.response;
+
+                    if (typeof(response) === 'function') {
+                        response = response(request);
+                    }
+
+                    res.end(rule.useRawResponse ? response : JSON.stringify(response))
                 }, rule.delay)
             } else {
                 res.writeHead(404)
