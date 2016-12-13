@@ -126,7 +126,6 @@ const OPERATORS = {
         var total = 0;
 
         _.each(orderItems, (orderItem) => {
-            console.log(orderItem.itemId, operator.items);
             if (isApplicableItem(orderItem.itemId, operator.items)) {
                 total += (orderItem.count || 1);
             }
