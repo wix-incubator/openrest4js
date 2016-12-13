@@ -3,19 +3,19 @@ import OrderItemHelper from './OrderItem.js';
 import * as availability from 'availability';
 import moment from 'moment-timezone';
 
-var self = {};
+let self = {};
 
 function indexOf(arr, val)
 {
-    for (var i in arr) if (arr[i] === val) return i;
+    for (let i in arr) if (arr[i] === val) return i;
     return -1;
 }
 
 self.isVariable = function(params) {
-    var charge = params.charge;
-    var type = charge.amountRuleType || 'variable';
+    let charge = params.charge;
+    let type = charge.amountRuleType || 'variable';
 
-    var buyXgetYFree = JSON.parse((charge.properties || {})['com.openrest'] || '{}').buyXgetYFree || null;
+    let buyXgetYFree = JSON.parse((charge.properties || {})['com.openrest'] || '{}').buyXgetYFree || null;
     if (buyXgetYFree) {
         return false;
     }
@@ -24,14 +24,14 @@ self.isVariable = function(params) {
 };
 
 self.isApplicable = function(params) {
-    var charge = params.charge;
-    var clubIds = params.clubIds;
-    var ref = params.ref;
-    var timezone = params.timezone;
-    var deliveryType = params.deliveryType || '';
-    var dontCheckAvailability = params.dontCheckAvailability || false;
-    var skipClub = params.skipClub || false;
-    var chargeUsages = params.chargeUsages || {};
+    let charge = params.charge;
+    let clubIds = params.clubIds;
+    let ref = params.ref;
+    let timezone = params.timezone;
+    let deliveryType = params.deliveryType || '';
+    let dontCheckAvailability = params.dontCheckAvailability || false;
+    let skipClub = params.skipClub || false;
+    let chargeUsages = params.chargeUsages || {};
 
     if (charge.state === 'closed') return false;
 
@@ -45,9 +45,9 @@ self.isApplicable = function(params) {
     }
 
     if ((!dontCheckAvailability) && (charge.availability)) {
-        var now = moment.tz(timezone);
+        let now = moment.tz(timezone);
 
-        var util = new availability.AvailabilityIterator({
+        let util = new availability.AvailabilityIterator({
             cal : now,
             availability : charge.availability || {}
         });
@@ -56,7 +56,7 @@ self.isApplicable = function(params) {
             return false;
         }
 
-        var status = util.next();
+        let status = util.next();
         if (status.status === 'unavailable') return false;
     }
 
@@ -82,23 +82,23 @@ self.isApplicable = function(params) {
 };
 
 self.calculateAmount = function(params) {
-    var charge = params.charge;
-    var orderItems = params.orderItems;
-    var maxDiscount = params.maxDiscount || 0;
-    var extraCost = params.extraCost;
-    var isLoggedIn = params.isLoggedIn;
-    var chargeUsages = params.chargeUsages || {};
-    var type = charge.amountRuleType || 'variable';
+    let charge = params.charge;
+    let orderItems = params.orderItems;
+    let maxDiscount = params.maxDiscount || 0;
+    let extraCost = params.extraCost;
+    let isLoggedIn = params.isLoggedIn;
+    let chargeUsages = params.chargeUsages || {};
+    let type = charge.amountRuleType || 'variable';
 
     if (typeof(maxDiscount) == 'undefined') maxDiscount = Number.MAX_VALUE;
 
-    var minApplicableOrderPrice = JSON.parse((charge.properties || {})['com.openrest'] || '{}').minApplicableOrderPrice || 0;
-    var buyXgetYFree = JSON.parse((charge.properties || {})['com.openrest'] || '{}').buyXgetYFree || null;
+    let minApplicableOrderPrice = JSON.parse((charge.properties || {})['com.openrest'] || '{}').minApplicableOrderPrice || 0;
+    let buyXgetYFree = JSON.parse((charge.properties || {})['com.openrest'] || '{}').buyXgetYFree || null;
 
     // Check that the minimal application order price is valid
-    var totalApplicableItems = 0;
-    for (var i in orderItems) {
-        var item = orderItems[i];
+    let totalApplicableItems = 0;
+    for (let i in orderItems) {
+        let item = orderItems[i];
         if (isApplicableItem({charge:charge, itemId:item.itemId})) {
             totalApplicableItems += OrderItemHelper.getTotalPrice({orderItem:item});
         }
@@ -115,11 +115,11 @@ self.calculateAmount = function(params) {
     }
 
     if (buyXgetYFree) {
-        var x = buyXgetYFree.x;
-        var y = buyXgetYFree.y;
+        let x = buyXgetYFree.x;
+        let y = buyXgetYFree.y;
 
         // Get all applicable items' price in a sorted list
-        var applicableItems = _.flatten(_.compact(_.map(orderItems, function(orderItem) {
+        let applicableItems = _.flatten(_.compact(_.map(orderItems, function(orderItem) {
             if (!isApplicableItem({charge:charge, itemId:orderItem.itemId})) {
                 return null;
             }
@@ -127,7 +127,7 @@ self.calculateAmount = function(params) {
             return _.map(_.range(orderItem.count || 1), function() {
                 return OrderItemHelper.getTotalPrice({orderItem})/(orderItem.count || 1);
             });
-        }))).sort(function(x,y) { return x-y; }) // For some strange reason my chrome did not
+        }))).sort(function(x,y) { return x-y; }); // For some strange reason my chrome did not
         // agree to sort it by numeric value without the lamda function
 
         console.log('[ChargeHelper] buyXgetYFree applicable prices: ', applicableItems);
@@ -140,7 +140,7 @@ self.calculateAmount = function(params) {
 
         console.log('[ChargeHelper] buyXgetYFree (x, y): ', x, y);
 
-        var value = -1 * _.reduce(applicableItems.splice(0, y), function(memo, num){ return memo + num; }, 0);
+        let value = -1 * _.reduce(applicableItems.splice(0, y), function(memo, num){ return memo + num; }, 0);
 
         // Ick - for Ratto's
         if ((charge.id === '5807927855457115') && (value < -875)) {
@@ -150,8 +150,8 @@ self.calculateAmount = function(params) {
     }
 
     else if (type == 'fixed') {
-        for (var i in orderItems) {
-            var item = orderItems[i];
+        for (let i in orderItems) {
+            let item = orderItems[i];
             if (isApplicableItem({charge:charge, itemId:item.itemId})) {
                 return Math.max(charge.amountRule, -1*maxDiscount);
             }
@@ -159,18 +159,16 @@ self.calculateAmount = function(params) {
     } else if (type == 'percentage') {
         return Math.min(calculateChargeValuePercentage({charge:charge, orderItems:orderItems, extraCost:extraCost}), maxDiscount);
     } else if (type == 'fixed_per_item') {
-        var total = 0;
-        for (var i in orderItems)
-            {
-                var item = orderItems[i];
-                if (isApplicableItem({charge:charge, itemId:item.itemId}))
-                {
-                    var singlePrice = OrderItemHelper.getTotalPrice({orderItem:item}) / (item.count || 1);
-                    var discount = Math.max(-1*singlePrice, charge.amountRule) * (item.count || 1);
-                    total += discount;
-                }
+        let total = 0;
+        for (let i in orderItems) {
+            let item = orderItems[i];
+            if (isApplicableItem({charge:charge, itemId:item.itemId})) {
+                let singlePrice = OrderItemHelper.getTotalPrice({orderItem:item}) / (item.count || 1);
+                let discount = Math.max(-1*singlePrice, charge.amountRule) * (item.count || 1);
+                total += discount;
             }
-            return total;
+        }
+        return total;
     } else if (type == 'variable') {
         if ((charge.variableAmountRuleType) && (charge.variableAmountRuleType == 'fixed')) {
             return Math.max(charge.variableAmountRule, -1*maxDiscount);
@@ -182,19 +180,19 @@ self.calculateAmount = function(params) {
     }
 
     return 0;
-}
+};
 
 function calculateChargeValuePercentage(params)
 {
-    var charge = params.charge;
-    var orderItems = params.orderItems;
-    var extraCost = params.extraCost;
-    var percentage = params.percentage || parseInt(charge.amountRule);
+    let charge = params.charge;
+    let orderItems = params.orderItems;
+    let extraCost = params.extraCost;
+    let percentage = params.percentage || parseInt(charge.amountRule);
 
-    var total = 0;
+    let total = 0;
     if (typeof(orderItems) != 'undefined') {
-        for (var i in orderItems) {
-            var item = orderItems[i];
+        for (let i in orderItems) {
+            let item = orderItems[i];
             if (isApplicableItem({charge:charge, itemId:item.itemId})) {
                 total += OrderItemHelper.getTotalPrice({orderItem:item}) * percentage / 10000;
             }
@@ -209,12 +207,12 @@ function calculateChargeValuePercentage(params)
 }
 
 function isApplicableItem(params) {
-    var charge = params.charge;
-    var itemId = params.itemId;
+    let charge = params.charge;
+    let itemId = params.itemId;
 
     if ((charge.itemIds || null) === null) return true;
 
-    var items = charge.itemIds;
+    let items = charge.itemIds;
 
     charge.mode = charge.mode || 'include';
 
@@ -225,9 +223,9 @@ function isApplicableItem(params) {
 }
 
 self.getTitle = function(params) {
-    var charge = params.charge;
-    var i18n = params.i18n;
-    var defaultLocale = params.defaultLocale;
+    let charge = params.charge;
+    let i18n = params.i18n;
+    let defaultLocale = params.defaultLocale;
 
     if ((charge.type) && (charge.type == 'club_coupon')) {
         return charge.coupon.title[i18n.getLocale()] || charge.coupon.title[defaultLocale];
@@ -240,16 +238,16 @@ self.getTitle = function(params) {
     }
 
     return '';
-}
+};
 
 self.getDescription = function(params)
 {
-    var charge = params.charge;
-    var i18n = params.i18n;
-    var defaultLocale = params.defaultLocale;
+    let charge = params.charge;
+    let i18n = params.i18n;
+    let defaultLocale = params.defaultLocale;
 
     if ((charge.type) && ((charge.type == 'club_coupon') || (charge.type == 'coupon'))) {
-        var ret = '';
+        let ret = '';
 
         if (charge.coupon.description) ret = charge.coupon.description[i18n.getLocale()] || charge.coupon.description[defaultLocale];
 
@@ -257,6 +255,6 @@ self.getDescription = function(params)
     }
 
     return undefined;
-}
+};
 
 export default self;

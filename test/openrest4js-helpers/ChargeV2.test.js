@@ -1,15 +1,13 @@
 import ChargeV2 from '../../src/openrest4js-helpers/ChargeV2.js';
 import { expect } from 'chai';
 import moment from 'moment';
-import { helpers, fixtures } from '../../src/index.js';
-
-const { Charge, Time } = helpers;
+import { fixtures } from '../../src/index.js';
 
 describe('openrest4js-helpers: ChargesV2', () => {
 
     describe('isApplicable', () => {
 
-        it('returns whether or not a charge is applicable based on delivery type, platform, minimum, and time', () => { 
+        it('returns whether or not a charge is applicable based on delivery type, platform, minimum, and time', () => {
             const now = moment();
 
             const charge = fixtures.ChargeV2().
@@ -53,7 +51,7 @@ describe('openrest4js-helpers: ChargesV2', () => {
     });
 
     describe('isDisplayable', () => {
-        it('returns whether or not a charge should be displayed in the cart based on delivery type, platform, and time', () => { 
+        it('returns whether or not a charge should be displayed in the cart based on delivery type, platform, and time', () => {
             const now = moment();
 
             const charge = fixtures.ChargeV2().

@@ -4,7 +4,7 @@ export default {
         return date.diff(firstWeekday, 'minutes');
     },
 
-}
+};
 
 function getFirstWeekday(date) {
     return date.isoWeekday() % 7 === 0 ?

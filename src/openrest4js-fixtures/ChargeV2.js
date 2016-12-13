@@ -8,7 +8,6 @@ export default function createCharge() {
             id:Math.random(),
             type:'discount',
             mandatory:false,
-            displayCondition: {type: 'true'},
             operator: {},
             condition: {
                 type: 'and',
@@ -39,14 +38,14 @@ export default function createCharge() {
             fixture.id = _id;
             return this;
         },
-               
+
         title(val) {
-            fixture.title = {'en_US':val}
+            fixture.title = {'en_US':val};
             return this;
         },
 
         description(val) {
-            fixture.title = {'en_US':val}
+            fixture.title = {'en_US':val};
             return this;
         },
 
@@ -64,7 +63,7 @@ export default function createCharge() {
                 denominators: [
                     {type: 'value', value: -100000},
                 ],
-            }
+            };
             return this;
         },
 

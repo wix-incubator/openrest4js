@@ -44,7 +44,6 @@ export default {
                             charge          : charge,
                             deliveryTime    : deliveryTime,
                             deliveryType    : order.delivery.type,
-                            orderItems      : order.orderItems,
                             source          : order.source,
                             platform        : order.platform,
                             orderItems      : order.orderItems,
@@ -61,4 +60,4 @@ export default {
 
         return orderCharges;
     }
-}
+};

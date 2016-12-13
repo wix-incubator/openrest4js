@@ -15,5 +15,5 @@ export default function createAvailability() {
         val() {
             return fixture;
         }
-    }
+    };
 }

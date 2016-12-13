@@ -1,20 +1,20 @@
-import { CommonProtocolDriver } from './CommonProtocolDriver'
+import { CommonProtocolDriver } from './CommonProtocolDriver';
 
 export default class OpenrestDriver {
     constructor({ port }) {
-        this._driver = new CommonProtocolDriver({port})
+        this._driver = new CommonProtocolDriver({port});
     }
 
     start() {
-        this._driver.start()
+        this._driver.start();
     }
 
     stop() {
-        this._driver.stop()
+        this._driver.stop();
     }
 
     reset() {
-        this._driver.reset()
+        this._driver.reset();
     }
 
     requestFor({ request }) {
@@ -25,7 +25,7 @@ export default class OpenrestDriver {
                     request,
                     response : { value },
                     delay
-                })
+                });
             },
             errors: ({ code, description }) => {
                 this._driver.addRule({
@@ -35,16 +35,16 @@ export default class OpenrestDriver {
                         error : code,
                         errorMessage : description
                     }
-                })
+                });
             },
             protocolErrors: () => {
-                 this._driver.addRule({
+                this._driver.addRule({
                     resource : '/',
                     request,
                     response : '<html></html>',
                     useRawResponse : true
-                })
-           }
-        }
+                });
+            }
+        };
     }
 }

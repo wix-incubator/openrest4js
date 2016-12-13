@@ -218,7 +218,7 @@ export default {
         if (charge.state === 'closed') return false;
 
         return checkCondition({condition:charge.condition, deliveryTime:deliveryTime, deliveryType:deliveryType,
-                              orderItems:orderItems, source:source, platform:platform});
+            orderItems:orderItems, source:source, platform:platform});
     },
 
     isDisplayable : function(params) {
@@ -232,7 +232,7 @@ export default {
         if (charge.state === 'closed') return false;
 
         return checkCondition({condition:charge.displayCondition, deliveryTime:deliveryTime, deliveryType:deliveryType,
-                              orderItems:orderItems, source:source, platform:platform});
+            orderItems:orderItems, source:source, platform:platform});
     },
 
     calculateAmount : function(params) {
@@ -244,6 +244,6 @@ export default {
         if (!this.isApplicable(params)) return 0;
 
         return calculateOperator({operator:charge.operator, orderItems:orderItems, orderCharges:orderCharges,
-                                 extraCost:extraCost});
+            extraCost:extraCost});
     }
-}
+};

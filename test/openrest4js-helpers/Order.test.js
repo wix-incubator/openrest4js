@@ -9,7 +9,7 @@ describe('openrest4js-helpers: Order', () => {
     describe('getOrderCharges', () => {
         it('returns the orderCharges according to the order', () => {
 
-            const emptyCharges = Order.getOrderCharges({});            
+            const emptyCharges = Order.getOrderCharges({});
             expect(emptyCharges).to.be.empty;
 
             let order = {};

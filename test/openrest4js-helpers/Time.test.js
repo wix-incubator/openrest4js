@@ -7,7 +7,7 @@ const {Time} = helpers;
 describe('openrest4js-helpers: Time', () => {
 
     describe('getMinuteOfWeek', () => {
-        it('returns the minute of week of a certain date', () => { 
+        it('returns the minute of week of a certain date', () => {
             //Given
             let date = moment("2016-04-03 14:00:00");
 
