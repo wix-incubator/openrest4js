@@ -19,15 +19,18 @@ export default class OpenrestClient {
         });
 
         xhr.onload = () => {
+            let response = null;
             try {
-                const response = JSON.parse(xhr.responseText);
-                callback(response);
+                response = JSON.parse(xhr.responseText);
             } catch (e) {
                 callback({
                     error: 'protocol',
                     errorMessage: 'protocol error'
                 });
+                return;
             }
+
+            callback(response);
         };
 
         xhr.open('POST', this.apiUrl, true);
