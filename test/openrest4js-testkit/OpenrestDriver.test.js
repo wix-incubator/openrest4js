@@ -1,9 +1,8 @@
 import {expect} from 'chai';
-import {testkit, OpenrestClient} from '../../src/index.js';
+import {OpenrestClient} from '../../src/index.js';
+import {OpenrestDriver} from '../../src/openrest4js-testkit';
 import {XMLHttpRequest} from 'xhr2';
 import _ from 'lodash';
-
-const {OpenrestDriver} = testkit;
 
 describe('OpenrestDriver', () => {
 
