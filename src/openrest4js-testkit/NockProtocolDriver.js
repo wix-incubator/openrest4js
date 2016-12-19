@@ -4,7 +4,7 @@ import _ from 'lodash';
 class NockProtocolDriver {
 
     constructor({url, version}) {
-        this.url = url || 'https://api.openrest.com';
+        this.url = url || 'https://api.wixrestaurants.com';
         this.version = version || 'v1.1';
     }
 
