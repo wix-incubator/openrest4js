@@ -29,6 +29,7 @@ Creates a [ChargeV2](https://github.com/wix/openrest4j/blob/master/openrest4j-ap
 - ```fixtures.ChargeV2.title(val)``` - Updates the title of the charge. Assumes 'en_US' locale.
 - ```fixtures.ChargeV2.description(val)``` - Updates the description of the charge. Assumes 'en_US' locale.
 - ```fixtures.ChargeV2.percentageDiscount({percentage, itemIds})``` - Sets the charge as a percentage discount. **percentage** is times 100 (eg, 1234 means 12.34%). **itemIds** is a list of itemIds to calculate the percentage on.
+- ```fixtures.ChargeV2.tax({percentage, itemIds})``` - Sets the charge as a tax charge. **percentage** is times 100 (eg, 1234 means 12.34%). **itemIds** is a list of itemIds to calculate the percentage on.
 - ```fixtures.ChargeV2.fixedDiscount({price})``` - Sets the charge as a fixed discount. **price** is times 100 (eg, 1234 means $12.34).
 - ```fixtures.ChargeV2.deliveryTypes(types)``` - Sets the list of delivery types in the charge's condition.
 - ```fixtures.ChargeV2.displayConditionDeliveryTypes(types)``` - Sets the list of delivery types in the charge's display condition.

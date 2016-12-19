@@ -64,6 +64,7 @@ export default function createCharge() {
                     {type: 'value', value: -100000},
                 ],
             };
+
             return this;
         },
 
@@ -79,6 +80,14 @@ export default function createCharge() {
                     {type:'value','value':-1}
                 ]
             };
+
+            return this;
+        },
+
+        tax({percentage, itemIds, chargeIds}) {
+            this.percentageDiscount({percentage, itemIds, chargeIds});
+            fixture.type = 'tax';
+            fixture.operator.denominators[0].value *= -1;
 
             return this;
         },

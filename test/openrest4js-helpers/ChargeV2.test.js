@@ -107,6 +107,9 @@ describe('openrest4js-helpers: ChargesV2', () => {
             const charge2 = fixtures.ChargeV2().id('charge2').percentageDiscount({percentage:10000, chargeIds:['aaa']}).val();
             expect(ChargeV2.calculateAmount({charge:charge2, orderItems, orderCharges})).to.equal(-80);
 
+            const charge3 = fixtures.ChargeV2().id('charge3').tax({percentage: 5000}).val();
+            expect(ChargeV2.calculateAmount({charge:charge3, orderItems, orderCharges})).to.equal(50);
+
             // Fixed
             const fixedOrderItems = [
                 fixtures.OrderItem().itemId('aaa').price(1000).val(),
