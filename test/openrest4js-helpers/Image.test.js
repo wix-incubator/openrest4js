@@ -115,6 +115,45 @@ describe('Image', () => {
             expect(Image.fill({url: unrecognizedUrl})).to.equal(unrecognizedUrl);
             expect(Image.fill({url: unrecognizedUrl, width: 20, height: 20})).to.equal(unrecognizedUrl);
         });
+
+        describe('Applies unsharp mask', () => {
+            it('does not do anything if sizes are invalid', () => {
+                expect(Image.fill({url: wixMediaManagerUrl, usm: { amount: '1.20', radius: '1.00', threshold: '0.01' }})).to.equal(wixMediaManagerUrl);
+            });
+
+            it('does not apply unsharp mask for partial usm object', () => {
+                expect(Image.fill({url: wixMediaManagerUrl, width:150, height:150, usm: { amount: null, radius: 1.00, threshold: 0.01 }}))
+                    .to.equal(`${wixMediaManagerUrl}/v1/fill/w_150,h_150/file.jpg`);
+
+                expect(Image.fill({url: wixMediaManagerUrl, width:150, height:150, usm: { amount: 1.20, radius: null, threshold: 0.01 }}))
+                    .to.equal(`${wixMediaManagerUrl}/v1/fill/w_150,h_150/file.jpg`);
+
+                expect(Image.fill({url: wixMediaManagerUrl, width:150, height:150, usm: { amount: 1.20, radius: 1.00, threshold: null }}))
+                    .to.equal(`${wixMediaManagerUrl}/v1/fill/w_150,h_150/file.jpg`);
+
+                expect(Image.fill({url: wixMediaManagerUrl, width:150, height:150}))
+                    .to.equal(`${wixMediaManagerUrl}/v1/fill/w_150,h_150/file.jpg`);
+            });
+
+            it('does not apply mask on string values', () => {
+                expect(Image.fill({url: wixMediaManagerUrl, width:150, height:150, usm: { amount: '1.20', radius: '1.00', threshold: '0.01' }}))
+                    .to.equal(`${wixMediaManagerUrl}/v1/fill/w_150,h_150/file.jpg`);
+            });
+
+            it('applies mask on numeric values', () => {
+                expect(Image.fill({url: wixMediaManagerUrl, width:150, height:150, usm: { amount: 1.20, radius: 1.00, threshold: 0.01 }}))
+                    .to.equal(`${wixMediaManagerUrl}/v1/fill/w_150,h_150,usm_1.20_1.00_0.01/file.jpg`);
+
+                expect(Image.fill({url: wixMediaManagerUrl, width:150, height:150, usm: { amount: 1.23, radius: 1.1, threshold: 0.2 }}))
+                    .to.equal(`${wixMediaManagerUrl}/v1/fill/w_150,h_150,usm_1.23_1.10_0.20/file.jpg`);
+            });
+
+            it('applies mask on round values', () => {
+                expect(Image.fill({url: wixMediaManagerUrl, width:150, height:150, usm: { amount: 1, radius: 1, threshold: 0 }}))
+                    .to.equal(`${wixMediaManagerUrl}/v1/fill/w_150,h_150,usm_1.00_1.00_0.00/file.jpg`);
+            });
+        });
+
     });
 });
 
