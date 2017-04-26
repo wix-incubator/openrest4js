@@ -152,6 +152,11 @@ describe('Image', () => {
                 expect(Image.fill({url: wixMediaManagerUrl, width:150, height:150, usm: { amount: 1, radius: 1, threshold: 0 }}))
                     .to.equal(`${wixMediaManagerUrl}/v1/fill/w_150,h_150,usm_1.00_1.00_0.00/file.jpg`);
             });
+
+            it('applies mask with default values', () => {
+                expect(Image.fillSharp({url: wixMediaManagerUrl, width:150, height:150}))
+                    .to.equal(`${wixMediaManagerUrl}/v1/fill/w_150,h_150,usm_1.20_1.00_0.01/file.jpg`);
+            });
         });
 
     });

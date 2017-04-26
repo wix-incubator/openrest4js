@@ -42,6 +42,10 @@ export default {
         }
 
         return url;
+    },
+
+    fillSharp({url, width, height} = {}) {
+        return this.fill({url, width, height, usm: { amount: 1.20, radius: 1.00, threshold: 0.01 } });
     }
 };
 
