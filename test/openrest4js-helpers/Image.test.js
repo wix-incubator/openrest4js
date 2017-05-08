@@ -99,6 +99,7 @@ describe('Image', () => {
             expect(Image.fill({url: wixMediaManagerUrl, width:100, height:150})).to.equal(`${wixMediaManagerUrl}/v1/fill/w_100,h_150/file.jpg`);
             expect(Image.fill({url: wixMediaManagerUrl, width:150, height:100})).to.equal(`${wixMediaManagerUrl}/v1/fill/w_150,h_100/file.jpg`);
             expect(Image.fill({url: wixMediaManagerUrl, width:5100, height:5100})).to.equal(`${wixMediaManagerUrl}/v1/fill/w_5100,h_5100/file.jpg`);
+            expect(Image.fill({url: wixMediaManagerUrl, width:5100, height:5100, webpEnabled: true})).to.equal(`${wixMediaManagerUrl}/v1/fill/w_5100,h_5100/file.webp`);
         });
 
         it('resizes Wix Media Manager URLs to their maximum size when given unsupported size', () => {

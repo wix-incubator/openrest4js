@@ -19,7 +19,7 @@ export default {
      * @param width    Resized image width, 0 means max size.
      * @param height   Resized image height, 0 means max size.
      */
-    fill({url = null, width = 0, height = 0, usm = {}} = {}) {
+    fill({url = null, width = 0, height = 0, usm = {}, webpEnabled = false} = {}) {
 
         if (!url) {
             return null;
@@ -33,19 +33,21 @@ export default {
             return `${url}=s${(size >= 0 && size <= googleImagesApiMaxPixels) ? size : 0}`;
         }
 
+        const filename = webpEnabled ? 'file.webp' : 'file.jpg';
+
         if (wixMediaManagerUrlPattern.test(url)) {
-            return (width > 0 && height > 0 && width <= wixMediaPlatformMaxPixels && height <= wixMediaPlatformMaxPixels) ? `${url}/v1/fill/w_${width},h_${height}${usmString}/file.jpg` : url;
+            return (width > 0 && height > 0 && width <= wixMediaPlatformMaxPixels && height <= wixMediaPlatformMaxPixels) ? `${url}/v1/fill/w_${width},h_${height}${usmString}/${filename}` : url;
         }
 
         if (wixMediaPlatformUrlPattern.test(url)) {
-            return (width > 0 && height > 0 && width <= wixMediaPlatformMaxPixels && height <= wixMediaPlatformMaxPixels) ? `${url}v1/fill/w_${width},h_${height}${usmString}/file.jpg` : url;
+            return (width > 0 && height > 0 && width <= wixMediaPlatformMaxPixels && height <= wixMediaPlatformMaxPixels) ? `${url}v1/fill/w_${width},h_${height}${usmString}/${filename}` : url;
         }
 
         return url;
     },
 
-    fillSharp({url, width, height} = {}) {
-        return this.fill({url, width, height, usm: { amount: 1.20, radius: 1.00, threshold: 0.01 } });
+    fillSharp({url, width, height, webpEnabled = false} = {}) {
+        return this.fill({url, width, height, usm: { amount: 1.20, radius: 1.00, threshold: 0.01 }, webpEnabled});
     }
 };
 
