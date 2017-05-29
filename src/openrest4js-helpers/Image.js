@@ -33,14 +33,13 @@ export default {
             return `${url}=s${(size >= 0 && size <= googleImagesApiMaxPixels) ? size : 0}`;
         }
 
-        const filename = webpEnabled ? 'file.webp' : 'file.jpg';
-
         if (wixMediaManagerUrlPattern.test(url)) {
+            const filename = webpEnabled ? 'file.webp' : 'file.jpg';
             return (width > 0 && height > 0 && width <= wixMediaPlatformMaxPixels && height <= wixMediaPlatformMaxPixels) ? `${url}/v1/fill/w_${width},h_${height}${usmString}/${filename}` : url;
         }
 
         if (wixMediaPlatformUrlPattern.test(url)) {
-            return (width > 0 && height > 0 && width <= wixMediaPlatformMaxPixels && height <= wixMediaPlatformMaxPixels) ? `${url}v1/fill/w_${width},h_${height}${usmString}/${filename}` : url;
+            return (width > 0 && height > 0 && width <= wixMediaPlatformMaxPixels && height <= wixMediaPlatformMaxPixels) ? `${url}v1/fill/w_${width},h_${height}${usmString}/file.jpg` : url;
         }
 
         return url;
