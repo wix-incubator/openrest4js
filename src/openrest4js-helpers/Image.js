@@ -39,7 +39,7 @@ export default {
         }
 
         if (wixMediaPlatformUrlPattern.test(url)) {
-            return (width > 0 && height > 0 && width <= wixMediaPlatformMaxPixels && height <= wixMediaPlatformMaxPixels) ? `${url}v1/fill/w_${width},h_${height}${usmString}/file.jpg` : url;
+            return (width > 0 && height > 0 && width <= wixMediaPlatformMaxPixels && height <= wixMediaPlatformMaxPixels) ? `${url}v1/fill/w_${width},h_${height}/file.jpg` : url;
         }
 
         return url;
