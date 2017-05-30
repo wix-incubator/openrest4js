@@ -50,16 +50,16 @@ describe('Image', () => {
         });
 
         it('resizes Wix Media Platform URLs when given a supported size', () => {
-            expect(Image.fill({url: wixMediaPlatformUrl1, width:150, height:250})).to.equal(`${wixMediaPlatformUrl1}v1/fill/w_150,h_250/file.jpg`);
-            expect(Image.fill({url: wixMediaPlatformUrl2, width:150, height:250})).to.equal(`${wixMediaPlatformUrl2}v1/fill/w_150,h_250/file.jpg`);
+            expect(Image.fill({url: wixMediaPlatformUrl1, width:150, height:250})).to.equal(wixMediaPlatformUrl1);
+            expect(Image.fill({url: wixMediaPlatformUrl2, width:150, height:250})).to.equal(wixMediaPlatformUrl2);
 
-            expect(Image.fill({url: wixMediaPlatformUrl1, width:5100, height:100})).to.equal(`${wixMediaPlatformUrl1}v1/fill/w_5100,h_100/file.jpg`);
-            expect(Image.fill({url: wixMediaPlatformUrl2, width:5100, height:100})).to.equal(`${wixMediaPlatformUrl2}v1/fill/w_5100,h_100/file.jpg`);
+            expect(Image.fill({url: wixMediaPlatformUrl1, width:5100, height:100})).to.equal(wixMediaPlatformUrl1);
+            expect(Image.fill({url: wixMediaPlatformUrl2, width:5100, height:100})).to.equal(wixMediaPlatformUrl2);
 
-            expect(Image.fill({url: wixMediaPlatformUrl1, width:100, height:5100})).to.equal(`${wixMediaPlatformUrl1}v1/fill/w_100,h_5100/file.jpg`);
-            expect(Image.fill({url: wixMediaPlatformUrl2, width:100, height:5100})).to.equal(`${wixMediaPlatformUrl2}v1/fill/w_100,h_5100/file.jpg`);
+            expect(Image.fill({url: wixMediaPlatformUrl1, width:100, height:5100})).to.equal(wixMediaPlatformUrl1);
+            expect(Image.fill({url: wixMediaPlatformUrl2, width:100, height:5100})).to.equal(wixMediaPlatformUrl2);
 
-            expect(Image.fill({url: wixMediaPlatformUrl2, width:100, height:5100, webpEnabled:true})).to.equal(`${wixMediaPlatformUrl2}v1/fill/w_100,h_5100/file.jpg`);
+            expect(Image.fill({url: wixMediaPlatformUrl2, width:100, height:5100, webpEnabled:true})).to.equal(wixMediaPlatformUrl2);
         });
 
         it('resizes Wix Media Platform URLs to their maximum size when given unsupported size', () => {

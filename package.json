@@ -27,9 +27,10 @@
   "homepage": "https://github.com/wix/openrest4js",
   "dependencies": {
     "availability": "^2.1.254",
-    "moment": "^2.15.2",
     "lodash": "^4.8.2",
-    "moment-timezone": "^0.5.7"
+    "moment": "^2.15.2",
+    "moment-timezone": "^0.5.7",
+    "wix-restaurants-js-sdk": "^1.0.197"
   },
   "devDependencies": {
     "babel-cli": "^6.5.2",
