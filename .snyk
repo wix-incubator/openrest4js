@@ -1,0 +1,18 @@
+# Snyk (https://snyk.io) policy file, patches or ignores known vulnerabilities.
+version: v1.13.5
+ignore: {}
+# patches apply the minimum changes required to fix a vulnerability
+patch:
+  SNYK-JS-LODASH-450202:
+    - lodash:
+        patched: '2019-07-08T02:33:16.745Z'
+    - availability > lodash:
+        patched: '2019-07-08T02:33:16.745Z'
+    - wix-restaurants-js-sdk > lodash:
+        patched: '2019-07-08T02:33:16.745Z'
+    - availability > interval-utils > lodash:
+        patched: '2019-07-08T02:33:16.745Z'
+    - wix-restaurants-js-sdk > availability > lodash:
+        patched: '2019-07-08T02:33:16.745Z'
+    - wix-restaurants-js-sdk > availability > interval-utils > lodash:
+        patched: '2019-07-08T02:33:16.745Z'
