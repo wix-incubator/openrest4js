@@ -8,9 +8,10 @@
     "lint": "eslint ./src ./test",
     "posttest": "npm run lint",
     "compile": "babel -d dist/ src/",
-    "prepublish": "npm test && npm run compile",
+    "prepublish": "npm run snyk-protect && npm test && npm run compile",
     "build": ":",
-    "release": "npm install wnpm-ci --no-save && wnpm-release -- --no-shrinkwrap"
+    "release": "npm install wnpm-ci --no-save && wnpm-release -- --no-shrinkwrap",
+    "snyk-protect": "snyk protect"
   },
   "repository": {
     "type": "git",
@@ -30,7 +31,8 @@
     "lodash": "^4.8.2",
     "moment": "^2.15.2",
     "moment-timezone": "^0.5.7",
-    "wix-restaurants-js-sdk": "^1.0.197"
+    "wix-restaurants-js-sdk": "^1.0.197",
+    "snyk": "^1.317.0"
   },
   "devDependencies": {
     "babel-cli": "^6.5.2",
@@ -53,5 +55,6 @@
   },
   "directories": {
     "test": "test"
-  }
+  },
+  "snyk": true
 }
